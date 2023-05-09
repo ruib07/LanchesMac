@@ -1,0 +1,98 @@
+﻿@model ReflectionIT.Mvc.Paging.PagingList<LanchesMac.Models.Lanche>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Produtos</h1>
+<br />
+<form method="get" class="form-inline" style="width: 40%">
+    <div class="form-group d-flex align-items-center">
+        <input name="filter" class="form-control mr-2 rounded-0 border-right-0" placeholder="Filtrar" value="@Model.RouteValue["Filter"]" style="flex: 1;">
+        <button type="submit" class="btn btn-info rounded-0 border-left-0" style="color:white">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Procurar
+        </button>
+    </div>
+</form>
+<br />
+
+<div class="button-container" style="display:flex; justify-content:left;">
+    <button class="btn btn-primary" style="margin: 0 10px;">
+    <a asp-action="Create" style="color:white; text-decoration:none">Criar Novo Produto</a>
+    </button><br /><br />
+    <button class="btn btn-primary" style="margin: 0 10px;">
+        <a asp-controller="AdminLanchesReport" asp-action="LanchesCategoriaReport" style="color:white; text-decoration:none;">Gerar Relatório</a>
+    </button><br /><br />
+    <button class="btn btn-primary" style="margin: 0 10px;">
+        <a asp-controller="AdminLanchesReport" asp-action="LanchesCategoriaPDF" style="color:white; text-decoration:none;">Gerar PDF</a>
+    </button>
+</div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescricaoCurta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Preco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsLanchePreferido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmEstoque)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescricaoCurta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsLanchePreferido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmEstoque)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria.CategoriaNome)
+            </td>
+                <td class="button-container" style="display:flex; justify-content:left;">
+                <button class="btn btn-success" style="margin: 0 10px;">
+                <a asp-action="Edit" asp-route-id="@item.LancheId" style="color:white; text-decoration:none">Editar</a> 
+                </button>
+                <p></p>
+                <button class="btn btn-info" style="margin: 0 10px;">
+                <a asp-action="Details" asp-route-id="@item.LancheId" style="color:white; text-decoration:none">Detalhes</a> 
+                </button>
+                <p></p>
+                <button class="btn btn-danger" style="margin: 0 10px;">
+                <a asp-action="Delete" asp-route-id="@item.LancheId" style="color:white; text-decoration:none">Eliminar</a>
+                </button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<br />
+<div style="display: flex; flex-direction: column; align-items: center;">
+    <p>Total de Lanches: @Model.TotalRecordCount</p>
+    <vc:pager paging-list="@Model"></vc:pager>
+</div>
+<br />

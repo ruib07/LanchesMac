@@ -1,0 +1,37 @@
+﻿@model LanchesMac.Models.Categoria
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Eliminar</h1>
+
+<h3>Tem a certeza que pretende eliminar isto?</h3>
+<div>
+    <h4>Categoria</h4>
+    <br />
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoriaNome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CategoriaNome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+    </dl>
+    <br />
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CategoriaId" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <button class="btn btn-success">
+        <a asp-action="Index" style="color:white; text-decoration:none">Voltar à Lista</a>
+        </button>
+    </form>
+</div>

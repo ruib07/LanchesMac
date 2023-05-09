@@ -1,0 +1,63 @@
+﻿<title>
+    @ViewData["Title"] - Grafico de Vendas
+</title>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<div id="chart_div" style="width: 900px; height: 500px;"></div>
+
+<script type="text/javascript">
+    google.charts.load('current', { packages: ['corechart', 'bar'] });
+    google.charts.setOnLoadCallback(CarregaDados);
+
+    //obter os dados
+    function CarregaDados() {
+        $.ajax({
+            url: '@Url.Action("VendasLanches", "AdminGrafico")',
+            data: { dias: 7 },
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                GraficoVendasLanches(data);
+                return false;
+            }
+        });
+        return false;
+    }
+    //preparar os dados obtidos
+    function GraficoVendasLanches(data) {
+        var dataArray = [
+            ['Lanche', 'Quantidade', 'Valores(€)']
+        ];
+
+        $.each(data, function (i, item) {
+            dataArray.push([item.lancheNome, item.lanchesQuantidade, item.lanchesValorTotal]);
+        });
+
+        var data = google.visualization.arrayToDataTable(dataArray);
+
+        var options = {
+            title: 'Lanches - Vendas : últimos 7 dias',
+
+            curveType: 'function',
+            legend: { position: 'bottom' },
+
+            chartArea: {
+                width: '70%'
+            },
+            colors: ['#5202b5', '#d2a828'],
+            hAxis: {
+                title: 'Lanches',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Valor Total (em Euros)'
+            }
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>

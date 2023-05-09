@@ -1,0 +1,51 @@
+﻿@model IEnumerable<LanchesMac.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Categorias</h1>
+<br />
+
+<p>
+    <button class="btn btn-primary">
+    <a asp-action="Create" style="color:white; text-decoration:none">Criar Nova Categoria</a>
+    </button>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoriaNome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoriaNome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                <button class="btn btn-success">
+                <a asp-action="Edit" asp-route-id="@item.CategoriaId" style="color:white; text-decoration:none">Editar</a>
+                </button> |
+                <button class="btn btn-info">
+                <a asp-action="Details" asp-route-id="@item.CategoriaId" style="color:white; text-decoration:none">Detalhes</a>
+                </button> |
+                <button class="btn btn-danger">
+                <a asp-action="Delete" asp-route-id="@item.CategoriaId" style="color:white; text-decoration:none">Eliminar</a>
+                </button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<br />
