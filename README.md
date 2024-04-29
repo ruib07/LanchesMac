@@ -1,5 +1,5 @@
 To run this project, you have to delete the migrations folder, alter the connectionstring on the appsettings.json and run the following commands on the developer terminal:
- - Add-Migration <migration-name>
+ - Add-Migration migration-name
  - Update-Database
 
 Now you can use the website without any problems. Have a great day 😄
