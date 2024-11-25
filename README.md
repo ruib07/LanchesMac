@@ -3,9 +3,11 @@ To run this project, you have to delete the migrations folder, alter the connect
  - Update-Database
 
 Also you have to add on the AspNetUserRoles table on the database this:
-UserId	                              | RoleId
-519f96e4-199b-4415-8252-c343420bc282 |	371a64db-2fa4-4ba1-928f-4ab74854ae4f
-f804de7b-ccfd-4978-aea2-d0e70fc762b7 |	7877f5f5-d6c7-41f0-b59f-dd41c12c509f
+
+| **UserId**                             | **RoleId**                             |
+|----------------------------------------|----------------------------------------|
+| 519f96e4-199b-4415-8252-c343420bc282   | 371a64db-2fa4-4ba1-928f-4ab74854ae4f   |
+| f804de7b-ccfd-4978-aea2-d0e70fc762b7   | 7877f5f5-d6c7-41f0-b59f-dd41c12c509f   |
 
 Now you can use the web app without any problems. Have a great day 😄
 
